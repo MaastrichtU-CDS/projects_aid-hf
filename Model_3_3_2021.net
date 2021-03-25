@@ -1,0 +1,268 @@
+net
+{
+    node_size = (100 40);
+    HR_ToolBar_CDVT = "0";
+    HR_Html_Desc = "0";
+    HR_HTML_Desc = "";
+    HR_Groups_IDs = "";
+    HR_Node_Label_Style = "0";
+    HR_Desc = "";
+    HR_OOBN_CheckConsistency = "1";
+    HR_OOBN_FitExpand = "1";
+    HR_Zoom_ZoomFactor = "100";
+    HR_Groups_GroupColors = "";
+    HR_Groups_GroupNames = "";
+    HR_Groups_UserGroupsNo = "0";
+    HR_Color_Interface = "21";
+    HR_Color_Instance = "0";
+    HR_Color_Function = "4";
+    HR_Color_Utility = "36";
+    HR_Color_Decision = "17";
+    HR_Color_ContinuousChance = "48";
+    HR_Color_DiscreteChance = "16";
+    HR_Monitor_InitSD = "2";
+    HR_Monitor_Utility_Arrange = "0";
+    HR_Monitor_Mean_Variance = "1";
+    HR_Monitor_Chance_Utility = "1";
+    HR_Monitor_InitStates = "5";
+    HR_Monitor_OpenGraph = "0";
+    HR_Monitor_GraphPrecision = "100";
+    HR_Monitor_AutoUpdGraph = "0";
+    HR_Compile_MaxMinimalSeparators = "100000";
+    HR_Compile_ApproxEpsilon = "1.0E-5";
+    HR_Compile_Approximate = "0";
+    HR_Compile_SaveToMemory = "0";
+    HR_Compile_Compress = "0";
+    HR_Compile_TriangMethod = "0";
+    HR_Propagate_AutoNormal = "1";
+    HR_Propagate_AutoSum = "1";
+    HR_Propagate_Auto = "1";
+    HR_Font_Italic = "0";
+    HR_Font_Weight = "400";
+    HR_Font_Size = "-12";
+    HR_Font_Name = "javax.swing.plaf.FontUIResource[family=Tahoma,name=Tahoma,style=plain,size=11]";
+    HR_Grid_GridShow = "0";
+    HR_Grid_GridSnap = "0";
+    HR_Grid_Y = "40";
+    HR_Grid_X = "40";
+}
+
+utility UResource_use
+{
+    label = "Resource use";
+    position = (1193 352);
+    HR_Group = "0";
+    HR_HTML_Desc = "";
+    HR_Desc = "";
+}
+
+utility UCongestion
+{
+    label = "Congestion";
+    position = (756 184);
+    HR_Group = "0";
+    HR_HTML_Desc = "";
+    HR_Desc = "";
+}
+
+node Congestion_Future
+{
+    label = "Congestion future";
+    position = (771 288);
+    states = ("no" "yes");
+    HR_HTML_Desc = "";
+    HR_State_0 = "";
+    HR_State_1 = "";
+    HR_Desc = "";
+    HR_LinkMode = "[Weight_gain:0][Dyspnoea:0][Appetite_loss:0][UCongestion:0]";
+    HR_LinkControlPoints = "";
+    HR_Group = "0";
+}
+
+node Kidney_function_future_1
+{
+    label = "Kidney function";
+    position = (905 292);
+    states = ("good" "bad");
+    HR_State_0 = "";
+    HR_State_1 = "";
+    HR_Desc = "";
+    HR_LinkMode = "[Health:0][U_Kidney_Function:0][Kidney_function_future:0]";
+    HR_HTML_Desc = "";
+    HR_NodeSize = "(100, 40)";
+    HR_Group = "0";
+}
+
+decision Advice
+{
+    label = "";
+    position = (969 418);
+    states = ("Do nothing" "Increase dose or start diuretics" "Decrease dose" "Call help");
+    HR_LinkControlPoints = "";
+    HR_LinkMode = "[Health:0][Kidney_function_future:0][Congestion_Future:0][UResource_use:0]";
+    HR_Group = "0";
+    HR_Desc = "";
+    HR_State_3 = "";
+    HR_State_2 = "";
+    HR_State_1 = "";
+    HR_State_0 = "";
+}
+
+node Kidney_function_future
+{
+    label = "Kidney function future";
+    position = (1073 244);
+    states = ("good" "bad");
+    HR_NodeSize = "(140, 40)";
+    HR_HTML_Desc = "";
+    HR_LinkMode = "[Health:0][U_Kidney_Function:0]";
+    HR_Group = "0";
+    HR_Desc = "";
+    HR_State_1 = "";
+    HR_State_0 = "";
+}
+
+utility U_Kidney_Function
+{
+    label = "Kidney function";
+    position = (949 166);
+    HR_NodeSize = "(120, 40)";
+    HR_HTML_Desc = "";
+    HR_Group = "0";
+    HR_Desc = "";
+}
+
+node Appetite_loss
+{
+    label = "Loss of appetite";
+    position = (552 157);
+    states = ("no" "yes");
+    HR_Group = "0";
+    HR_Desc = "";
+    HR_State_1 = "";
+    HR_State_0 = "";
+}
+
+node Dyspnoea
+{
+    label = "Dyspnoea";
+    position = (443 163);
+    states = ("no" "yes");
+    HR_Group = "0";
+    HR_Desc = "";
+    HR_State_1 = "";
+    HR_State_0 = "";
+}
+
+node Weight_gain
+{
+    label = "Weight gain";
+    position = (321 170);
+    states = ("no" "yes");
+    HR_Group = "0";
+    HR_Desc = "";
+    HR_State_1 = "";
+    HR_State_0 = "";
+}
+
+node Congestion
+{
+    label = "";
+    position = (621 323);
+    states = ("no" "yes");
+    HR_LinkControlPoints = "";
+    HR_LinkMode = "[Weight_gain:0][Dyspnoea:0][Appetite_loss:0][Congestion_Future:0][UCongestion:0]";
+    HR_Group = "0";
+    HR_Desc = "";
+    HR_State_1 = "";
+    HR_State_0 = "";
+}
+
+potential (UResource_use | Advice)
+{
+    data
+     = ( 0	%  Advice=Do nothing
+	 -5	%  Advice=Increase dose or start diuretics
+	 0	%  Advice=Decrease dose
+	 -25 );	%  Advice=Call help
+}
+
+potential (UCongestion | Congestion Congestion_Future)
+{
+    data
+     = (( 0	%  Congestion=no  Congestion_Future=no
+	  -20 )	%  Congestion=no  Congestion_Future=yes
+	( 20	%  Congestion=yes  Congestion_Future=no
+	  -25 ));	%  Congestion=yes  Congestion_Future=yes
+}
+
+potential (Congestion_Future | Advice Congestion)
+{
+    data
+     = ((( 0.9 0.1 )	%  Advice=Do nothing  Congestion=no
+	 ( 0.05 0.95 ))	%  Advice=Do nothing  Congestion=yes
+	(( 0.95 0.05 )	%  Advice=Increase dose or start diuretics  Congestion=no
+	 ( 0.75 0.25 ))	%  Advice=Increase dose or start diuretics  Congestion=yes
+	(( 0.7 0.3 )	%  Advice=Decrease dose  Congestion=no
+	 ( 0.0524934 0.947507 ))	%  Advice=Decrease dose  Congestion=yes
+	(( 0.99 0.01 )	%  Advice=Call help  Congestion=no
+	 ( 0.95 0.05 )));	%  Advice=Call help  Congestion=yes
+}
+
+potential (Kidney_function_future_1)
+{
+    data = ( 0.9 0.1 );
+}
+
+potential (Advice)
+{
+    data = ( 0 1 0 0 );
+}
+
+potential (Kidney_function_future | Kidney_function_future_1 Advice)
+{
+    data
+     = ((( 0.9 0.1 )	%  Kidney_function_future_1=good  Advice=Do nothing
+	 ( 0.7 0.3 )	%  Kidney_function_future_1=good  Advice=Increase dose or start diuretics
+	 ( 0.95 0.05 )	%  Kidney_function_future_1=good  Advice=Decrease dose
+	 ( 0.8 0.2 ))	%  Kidney_function_future_1=good  Advice=Call help
+	(( 0.1 0.9 )	%  Kidney_function_future_1=bad  Advice=Do nothing
+	 ( 0.05 0.95 )	%  Kidney_function_future_1=bad  Advice=Increase dose or start diuretics
+	 ( 0.5 0.5 )	%  Kidney_function_future_1=bad  Advice=Decrease dose
+	 ( 0.1 0.9 )));	%  Kidney_function_future_1=bad  Advice=Call help
+}
+
+potential (U_Kidney_Function | Kidney_function_future_1 Kidney_function_future)
+{
+    data
+     = (( 0	%  Kidney_function_future_1=good  Kidney_function_future=good
+	  -10 )	%  Kidney_function_future_1=good  Kidney_function_future=bad
+	( 10	%  Kidney_function_future_1=bad  Kidney_function_future=good
+	  -10 ));	%  Kidney_function_future_1=bad  Kidney_function_future=bad
+}
+
+potential (Appetite_loss | Congestion)
+{
+    data
+     = (( 0.93 0.07 )	%  Congestion=no
+	( 0.75 0.25 ));	%  Congestion=yes
+}
+
+potential (Dyspnoea | Congestion)
+{
+    data
+     = (( 0.95 0.05 )	%  Congestion=no
+	( 0.7 0.3 ));	%  Congestion=yes
+}
+
+potential (Weight_gain | Congestion)
+{
+    data
+     = (( 0.9 0.1 )	%  Congestion=no
+	( 0.7 0.3 ));	%  Congestion=yes
+}
+
+potential (Congestion)
+{
+    data = ( 0.9 0.1 );
+}
