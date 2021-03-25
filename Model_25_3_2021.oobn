@@ -1,0 +1,2076 @@
+class Model_25_3_2021
+{
+    inputs = ();
+    outputs = ();
+    node_size = (80 40);
+    HR_Desc = "";
+    HR_OOBN_CheckConsistency = "1";
+    HR_OOBN_FitExpand = "1";
+    HR_Zoom_ZoomFactor = "100";
+    HR_Groups_GroupColors = "";
+    HR_Groups_GroupNames = "";
+    HR_Groups_UserGroupsNo = "0";
+    HR_Color_Interface = "21";
+    HR_Color_Instance = "0";
+    HR_Color_Function = "4";
+    HR_Color_Utility = "36";
+    HR_Color_Decision = "17";
+    HR_Color_ContinuousChance = "48";
+    HR_Color_DiscreteChance = "16";
+    HR_Monitor_InitSD = "2";
+    HR_Monitor_Utility_Arrange = "0";
+    HR_Monitor_Mean_Variance = "1";
+    HR_Monitor_Chance_Utility = "1";
+    HR_Monitor_InitStates = "5";
+    HR_Monitor_OpenGraph = "0";
+    HR_Monitor_GraphPrecision = "100";
+    HR_Monitor_AutoUpdGraph = "0";
+    HR_Compile_MaxMinimalSeparators = "100000";
+    HR_Compile_ApproxEpsilon = "1.0E-5";
+    HR_Compile_Approximate = "0";
+    HR_Compile_SaveToMemory = "0";
+    HR_Compile_Compress = "0";
+    HR_Compile_TriangMethod = "0";
+    HR_Propagate_AutoNormal = "1";
+    HR_Propagate_AutoSum = "1";
+    HR_Propagate_Auto = "1";
+    HR_Font_Italic = "0";
+    HR_Font_Weight = "400";
+    HR_Font_Size = "-12";
+    HR_Font_Name = "javax.swing.plaf.FontUIResource[family=Tahoma,name=Tahoma,style=plain,size=13]";
+    HR_Grid_GridShow = "0";
+    HR_Grid_GridSnap = "0";
+    HR_Grid_Y = "40";
+    HR_Grid_X = "40";
+
+    node Sodium
+    {
+	label = "Sodium";
+	position = (583 614);
+	states = ("Not elevated" "Elevated");
+	HR_LinkMode = "[BP_T1:0]";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Weight
+    {
+	label = "Weight gain";
+	position = (1273 524);
+	states = ("Yes" "No");
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Diuretics
+    {
+	label = "Diuretics dose";
+	position = (583 530);
+	states = ("Dose 1" "Dose 2" "Dose 3" "Dose 4" "Dose 5");
+	HR_State_4 = "";
+	HR_State_3 = "";
+	HR_State_2 = "";
+	HR_LinkMode = "[Diuretics:0][Sodium:0]";
+	HR_NodeSize = "(132, 47)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Symptoms_B
+    {
+	label = "Self-reported symptoms B";
+	position = (1003 640);
+	states = ("State 1" "State 2");
+	HR_NodeSize = "(178, 52)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Gender
+    {
+	label = "Gender";
+	position = (569 62);
+	states = ("Male" "Female");
+	HR_NodeSize = "(86, 54)";
+	HR_State_0 = "Male";
+	HR_State_1 = "";
+	HR_Desc = "";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[Causeofheartfailure:0][LVEF:0][Age_1:0][LVEF_T0:0][Cause_HF_Tx:0]";
+	HR_Group = "0";
+    }
+
+    node BP
+    {
+	label = "Blood pressure";
+	position = (1121 528);
+	states = ("Normal" "Elevated" "Hypertension stage 1" "Hypertension stage 2" "Hypertensive crisis");
+	HR_State_0 = "SBP < 120 mmHg and DBP < 80 mmHg";
+	HR_State_1 = "SBP 120 -129 mmHg and DBP < 80 mmHg";
+	HR_State_2 = "SBP 130 - 139 mmHg or DBP 80 - 89 mmHg";
+	HR_State_3 = "SBP 140 - 180 mmHg or DBP 90 - 120 mmHg";
+	HR_State_4 = "SBP > 180 mmHg and/or DBP > 120 mmHg";
+	HR_Desc = "";
+	HR_NodeSize = "(142, 44)";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[Syncope:0][Dizziness:0][Orthostasis:0][Deceased_T2:0][Hospitalised_T2:0][Orthostasis_T1:0][Dizziness_T1:0][Syncope_T1:0][Symptoms_B:0]";
+	HR_Group = "0";
+    }
+
+    node Deceased_T2
+    {
+	label = "Deceased";
+	position = (1273 769);
+	states = ("Yes" "No");
+	HR_State_0 = "";
+	HR_State_1 = "";
+	HR_Desc = "";
+	HR_NodeSize = "(146, 43)";
+	HR_LinkMode = "[U_expected_adverse_event:0]";
+	HR_Group = "0";
+    }
+
+    node LVEF_T0
+    {
+	label = "LVEF";
+	position = (945 185);
+	states = ("< 40 %" "> 40 %");
+	HR_State_0 = "";
+	HR_State_1 = "";
+	HR_Desc = "";
+	HR_NodeSize = "(80, 40)";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[LVEF:0][LVEF_T0:0][Fluid_balance_T0:0][Fluid_balance_T1:0][BNP_T1:0]";
+	HR_Group = "0";
+    }
+
+    node Age_T1
+    {
+	label = "Age ";
+	position = (477 211);
+	states = ("1" "2" "3" "4" "5");
+	HR_NodeSize = "(96, 47)";
+	HR_State_0 = "< 50 years";
+	HR_State_1 = "50 - 60 years";
+	HR_State_2 = "50 - 60 years";
+	HR_State_3 = "60 - 70 years";
+	HR_State_4 = "> 80 years";
+	HR_State_5 = "";
+	HR_Desc = "";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[HF_Hosp:0][Death_cardiac:0][LVEF:0][BNP:0][Causeofheartfailure:0][Fluid_balance_T1:0][BNP_T1:0][Hospitalised_T2:0][Deceased_T2:0][Cause_HF_Tx:0]";
+	HR_Group = "0";
+    }
+
+    node BNP
+    {
+	label = "BNP";
+	position = (1131 199);
+	states = ("Not elevated" "Elevated");
+	HR_State_3 = "> 1500";
+	HR_State_2 = "=> 1500 - 2000";
+	HR_State_0 = "";
+	HR_State_1 = "";
+	HR_Desc = "";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[Current_diuretics_dose:0][Death_cardiac:0][Diuretics_dose:0][Fluid_balance_T1:0]";
+	HR_Group = "0";
+    }
+
+    node Cause_of_heart_failure
+    {
+	label = "Cause of heart failure";
+	position = (838 61);
+	states = ("Coronary artery disease" "Dilated cardiomyopathy" "Valvular heart disease" "Hypertensive heart disease" "Other");
+	HR_State_0 = "Coronary artery disease";
+	HR_State_1 = "";
+	HR_State_2 = "";
+	HR_State_3 = "";
+	HR_State_4 = "";
+	HR_State_5 = "";
+	HR_Desc = "";
+	HR_NodeSize = "(162, 50)";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[HF_Hosp:0][Death_cardiac:0][LVEF:0][BNP:0][Cause_HF_Tx:0][Fluid_balance_T0:0][Fluid_balance_T1:0][LVEF_T0:0][Arrhythmia_T0:0][BNP_T1:0]";
+	HR_Group = "0";
+    }
+
+    node Arrhythmia
+    {
+	label = "Arrhythmia";
+	position = (1465 199);
+	states = ("0" "1" "2" "3" "4");
+	HR_NodeSize = "(101, 42)";
+	HR_State_0 = "";
+	HR_State_1 = "";
+	HR_State_2 = "";
+	HR_State_3 = "";
+	HR_State_4 = "";
+	HR_Desc = "";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[HF_Hosp:0][Death_cardiac:0][Cause_HF_Tx:0][Hospitalised_T2:0][Deceased_T2:0]";
+	HR_Group = "0";
+    }
+
+    node Self_reported_symptoms_A
+    {
+	label = "Self-reported symptoms A";
+	position = (819 530);
+	states = ("1" "2" "3" "4");
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "";
+	HR_NodeSize = "(172, 49)";
+	HR_State_0 = "";
+	HR_State_1 = "";
+	HR_State_2 = "";
+	HR_State_3 = "";
+	HR_Desc = "NYHA class";
+	HR_Group = "0";
+    }
+
+    node Hospitalision
+    {
+	label = "Hospitalisation";
+	position = (560 784);
+	states = ("Yes" "No");
+	HR_State_0 = "";
+	HR_State_1 = "";
+	HR_Desc = "";
+	HR_NodeSize = "(178, 47)";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[Death_cardiac:0][U_expected_adverse_event:0][Deceased_T2:0]";
+	HR_Group = "0";
+    }
+
+    node Kidney_functioning
+    {
+	label = "Kidney functioning";
+	position = (1344 92);
+	states = ("1" "2" "3" "4" "5");
+	HR_NodeSize = "(160, 45)";
+	HR_State_0 = "> 90 m/min/1.73m^2";
+	HR_State_1 = "> 60 and < 90 m/min/1.73m^2";
+	HR_State_2 = "> 30 and < 60 m/min/1.73m^2";
+	HR_State_3 = "> 15 and < 30 m/min/1.73m^2";
+	HR_State_4 = "< 15 m/min/1.73m^2";
+	HR_Desc = "";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[HF_Hosp:0][Death_cardiac:0][BP:0][Utility_eGFR:0][Fluid_balance_T1:0]";
+	HR_Group = "0";
+    }
+
+    node Fluid_balance_T1
+    {
+	label = "Fluid balance ";
+	position = (945 375);
+	states = ("Underload" "Balanced" "Overload");
+	HR_State_0 = "";
+	HR_State_1 = "";
+	HR_State_2 = "";
+	HR_Desc = "";
+	HR_NodeSize = "(175, 53)";
+	HR_LinkControlPoints = "";
+	HR_LinkMode = "[Diuretics_T1:0][Hospitalised_T2:0][Deceased_T2:0][Shortness_of_breath_T1:0][Orthopnea_T1:0][PND_T1:0][BP_T1:0][Edema_T1:0][Nocturia_T1:0][Fatigue_T1:0][Cough_T1:0][Diuretics:0][Weight:0]";
+	HR_Group = "0";
+    }
+
+    potential (Sodium | Diuretics)
+    {
+	data = (( 1 1 )	%  Diuretics=Dose 1
+		( 1 1 )	%  Diuretics=Dose 2
+		( 1 1 )	%  Diuretics=Dose 3
+		( 1 1 )	%  Diuretics=Dose 4
+		( 1 1 ));	%  Diuretics=Dose 5
+    }
+
+    potential (Weight | Fluid_balance_T1)
+    {
+	data = (( 1 1 )	%  Fluid_balance_T1=Underload
+		( 1 1 )	%  Fluid_balance_T1=Balanced
+		( 1 1 ));	%  Fluid_balance_T1=Overload
+    }
+
+    potential (Diuretics | Fluid_balance_T1)
+    {
+	data = (( 1 1 1 1 1 )	%  Fluid_balance_T1=Underload
+		( 1 1 1 1 1 )	%  Fluid_balance_T1=Balanced
+		( 1 1 1 1 1 ));	%  Fluid_balance_T1=Overload
+    }
+
+    potential (Symptoms_B | BP)
+    {
+	data = (( 1 1 )	%  BP=Normal
+		( 1 1 )	%  BP=Elevated
+		( 1 1 )	%  BP=Hypertension stage 1
+		( 1 1 )	%  BP=Hypertension stage 2
+		( 1 1 ));	%  BP=Hypertensive crisis
+    }
+
+    potential (Gender)
+    {
+	data = ( 0.45 1 );
+    }
+
+    potential (BP | Sodium Fluid_balance_T1)
+    {
+	data = ((( 1 1 1 1 1 )	%  Sodium=Not elevated  Fluid_balance_T1=Underload
+		 ( 1 1 1 1 1 )	%  Sodium=Not elevated  Fluid_balance_T1=Balanced
+		 ( 1 1 1 1 1 ))	%  Sodium=Not elevated  Fluid_balance_T1=Overload
+		(( 1 1 1 1 1 )	%  Sodium=Elevated  Fluid_balance_T1=Underload
+		 ( 1 1 1 1 1 )	%  Sodium=Elevated  Fluid_balance_T1=Balanced
+		 ( 1 1 1 1 1 )));	%  Sodium=Elevated  Fluid_balance_T1=Overload
+    }
+
+    potential (Deceased_T2 | Age_T1 BP Arrhythmia Hospitalision Fluid_balance_T1)
+    {
+	data = (((((( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=1  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		((((( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=2  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		((((( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=3  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		((((( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=4  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		((((( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Normal  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Normal  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Normal  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Normal  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=5  BP=Normal  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+		 (((( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 )))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Hospitalision=No  Fluid_balance_T1=Overload
+		  ((( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Balanced
+		    ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=Yes  Fluid_balance_T1=Overload
+		   (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Underload
+		    ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Balanced
+		    ( 1 1 ))))));	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Hospitalision=No  Fluid_balance_T1=Overload
+    }
+
+    potential (LVEF_T0 | Cause_of_heart_failure Gender)
+    {
+	data = ((( 1 1 )	%  Cause_of_heart_failure=Coronary artery disease  Gender=Male
+		 ( 1 1 ))	%  Cause_of_heart_failure=Coronary artery disease  Gender=Female
+		(( 1 1 )	%  Cause_of_heart_failure=Dilated cardiomyopathy  Gender=Male
+		 ( 1 1 ))	%  Cause_of_heart_failure=Dilated cardiomyopathy  Gender=Female
+		(( 1 1 )	%  Cause_of_heart_failure=Valvular heart disease  Gender=Male
+		 ( 1 1 ))	%  Cause_of_heart_failure=Valvular heart disease  Gender=Female
+		(( 1 1 )	%  Cause_of_heart_failure=Hypertensive heart disease  Gender=Male
+		 ( 1 1 ))	%  Cause_of_heart_failure=Hypertensive heart disease  Gender=Female
+		(( 1 1 )	%  Cause_of_heart_failure=Other  Gender=Male
+		 ( 1 1 )));	%  Cause_of_heart_failure=Other  Gender=Female
+    }
+
+    potential (Age_T1)
+    {
+	data = ( 1 1 1 1 1 );
+    }
+
+    potential (BNP | LVEF_T0 Cause_of_heart_failure Age_T1)
+    {
+	data = (((( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		  ( 1 1 ))	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		 (( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		  ( 1 1 ))	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		 (( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		  ( 1 1 ))	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		 (( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		  ( 1 1 ))	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		 (( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Other  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Other  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Other  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Other  Age_T1=4
+		  ( 1 1 )))	%  LVEF_T0=< 40 %  Cause_of_heart_failure=Other  Age_T1=5
+		((( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		  ( 1 1 ))	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		 (( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		  ( 1 1 ))	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		 (( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		  ( 1 1 ))	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		 (( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		  ( 1 1 ))	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		 (( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Other  Age_T1=1
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Other  Age_T1=2
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Other  Age_T1=3
+		  ( 1 1 )	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Other  Age_T1=4
+		  ( 1 1 ))));	%  LVEF_T0=> 40 %  Cause_of_heart_failure=Other  Age_T1=5
+    }
+
+    potential (Cause_of_heart_failure | Age_T1 Gender)
+    {
+	data = ((( 0.2 0.2 0.2 0.2 0.2 )	%  Age_T1=1  Gender=Male
+		 ( 0.2 0.2 0.2 0.2 0.2 ))	%  Age_T1=1  Gender=Female
+		(( 0.2 0.2 0.2 0.2 0.2 )	%  Age_T1=2  Gender=Male
+		 ( 0.2 0.2 0.2 0.2 0.2 ))	%  Age_T1=2  Gender=Female
+		(( 0.2 0.2 0.2 0.2 0.2 )	%  Age_T1=3  Gender=Male
+		 ( 0.2 0.2 0.2 0.2 0.2 ))	%  Age_T1=3  Gender=Female
+		(( 0.2 0.2 0.2 0.2 0.2 )	%  Age_T1=4  Gender=Male
+		 ( 0.2 0.2 0.2 0.2 0.2 ))	%  Age_T1=4  Gender=Female
+		(( 0.2 0.2 0.2 0.2 0.2 )	%  Age_T1=5  Gender=Male
+		 ( 0.2 0.2 0.2 0.2 0.2 )));	%  Age_T1=5  Gender=Female
+    }
+
+    potential (Arrhythmia | Cause_of_heart_failure)
+    {
+	data = (( 0.2 0.2 0.2 0.2 0.2 )	%  Cause_of_heart_failure=Coronary artery disease
+		( 0.2 0.2 0.2 0.2 0.2 )	%  Cause_of_heart_failure=Dilated cardiomyopathy
+		( 0.2 0.2 0.2 0.2 0.2 )	%  Cause_of_heart_failure=Valvular heart disease
+		( 0.2 0.2 0.2 0.2 0.2 )	%  Cause_of_heart_failure=Hypertensive heart disease
+		( 0.2 0.2 0.2 0.2 0.2 ));	%  Cause_of_heart_failure=Other
+    }
+
+    potential (Self_reported_symptoms_A | Fluid_balance_T1)
+    {
+	data = (( 1 1 1 1 )	%  Fluid_balance_T1=Underload
+		( 1 1 1 1 )	%  Fluid_balance_T1=Balanced
+		( 1 1 1 1 ));	%  Fluid_balance_T1=Overload
+    }
+
+    potential (Hospitalision | Age_T1 BP Arrhythmia Fluid_balance_T1)
+    {
+	data = ((((( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=1  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=1  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=1  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 ))))	%  Age_T1=1  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Overload
+		(((( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=2  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=2  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=2  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 ))))	%  Age_T1=2  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Overload
+		(((( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=3  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=3  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=3  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 ))))	%  Age_T1=3  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Overload
+		(((( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=4  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=4  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=4  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 ))))	%  Age_T1=4  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Overload
+		(((( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Normal  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=5  BP=Normal  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Elevated  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=5  BP=Elevated  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 1  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))	%  Age_T1=5  BP=Hypertension stage 2  Arrhythmia=4  Fluid_balance_T1=Overload
+		 ((( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=0  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=1  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=2  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Balanced
+		   ( 1 1 ))	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=3  Fluid_balance_T1=Overload
+		  (( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Underload
+		   ( 1 1 )	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Balanced
+		   ( 1 1 )))));	%  Age_T1=5  BP=Hypertensive crisis  Arrhythmia=4  Fluid_balance_T1=Overload
+    }
+
+    potential (Kidney_functioning)
+    {
+	data = ( 1 1 1 1 1 );
+    }
+
+    potential (Fluid_balance_T1 | LVEF_T0 Kidney_functioning BNP Cause_of_heart_failure Age_T1)
+    {
+	data = (((((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))	%  LVEF_T0=< 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		 (((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))	%  LVEF_T0=< 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		 (((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))	%  LVEF_T0=< 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		 (((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))	%  LVEF_T0=< 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		 (((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))))	%  LVEF_T0=< 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		((((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))	%  LVEF_T0=> 40 %  Kidney_functioning=1  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		 (((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))	%  LVEF_T0=> 40 %  Kidney_functioning=2  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		 (((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))	%  LVEF_T0=> 40 %  Kidney_functioning=3  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		 (((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))	%  LVEF_T0=> 40 %  Kidney_functioning=4  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+		 (((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 )))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Not elevated  Cause_of_heart_failure=Other  Age_T1=5
+		  ((( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Coronary artery disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Dilated cardiomyopathy  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Valvular heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=4
+		    ( 1 1 1 ))	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Hypertensive heart disease  Age_T1=5
+		   (( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=1
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=2
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=3
+		    ( 1 1 1 )	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=4
+		    ( 1 1 1 ))))));	%  LVEF_T0=> 40 %  Kidney_functioning=5  BNP=Elevated  Cause_of_heart_failure=Other  Age_T1=5
+    }
+} % class Model_25_3_2021
