@@ -1,0 +1,364 @@
+class Model_Mullens_et_al_2019_6_5_2021
+{
+    inputs = ();
+    outputs = ();
+    node_size = (80 40);
+    HR_Desc = "";
+    HR_OOBN_CheckConsistency = "1";
+    HR_OOBN_FitExpand = "1";
+    HR_Zoom_ZoomFactor = "100";
+    HR_Groups_GroupColors = "";
+    HR_Groups_GroupNames = "";
+    HR_Groups_UserGroupsNo = "0";
+    HR_Color_Interface = "21";
+    HR_Color_Instance = "0";
+    HR_Color_Function = "4";
+    HR_Color_Utility = "36";
+    HR_Color_Decision = "17";
+    HR_Color_ContinuousChance = "48";
+    HR_Color_DiscreteChance = "16";
+    HR_Monitor_InitSD = "2";
+    HR_Monitor_Utility_Arrange = "0";
+    HR_Monitor_Mean_Variance = "1";
+    HR_Monitor_Chance_Utility = "1";
+    HR_Monitor_InitStates = "5";
+    HR_Monitor_OpenGraph = "0";
+    HR_Monitor_GraphPrecision = "100";
+    HR_Monitor_AutoUpdGraph = "0";
+    HR_Compile_MaxMinimalSeparators = "100000";
+    HR_Compile_ApproxEpsilon = "1.0E-5";
+    HR_Compile_Approximate = "0";
+    HR_Compile_SaveToMemory = "0";
+    HR_Compile_Compress = "0";
+    HR_Compile_TriangMethod = "0";
+    HR_Propagate_AutoNormal = "1";
+    HR_Propagate_AutoSum = "1";
+    HR_Propagate_Auto = "1";
+    HR_Font_Italic = "0";
+    HR_Font_Weight = "400";
+    HR_Font_Size = "-12";
+    HR_Font_Name = "javax.swing.plaf.FontUIResource[family=Tahoma,name=Tahoma,style=plain,size=13]";
+    HR_Grid_GridShow = "0";
+    HR_Grid_GridSnap = "0";
+    HR_Grid_Y = "40";
+    HR_Grid_X = "40";
+
+    node Diffuse_B_lines_lung_ultrasound
+    {
+	label = "Diffuse B-lines lung ultrasound";
+	position = (1170 754);
+	states = ("Yes" "No");
+	HR_NodeSize = "(217, 41)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Pulmonary_vein_S_D_less_than_1
+    {
+	label = "Pulmonary vein S/D < 1";
+	position = (1511 669);
+	states = ("Yes" "No");
+	HR_NodeSize = "(202, 47)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Rales
+    {
+	label = "Rales";
+	position = (1260 456);
+	states = ("Yes" "No");
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Deceleration_time_less_than_130_ms
+    {
+	label = "Deceleration time < 130 ms";
+	position = (1284 671);
+	states = ("Yes" "No");
+	HR_NodeSize = "(224, 47)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Lateral_E_e_above_12
+    {
+	label = "Lateral E/e' > 12";
+	position = (1065 666);
+	states = ("Yes" "No");
+	HR_NodeSize = "(158, 46)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Mitral_inflow_E_wave_velocity_above_50_cm_per_s
+    {
+	label = "Mitral inflow E-wave velocity > 50 cm/s";
+	position = (848 662);
+	states = ("Yes" "No");
+	HR_NodeSize = "(253, 48)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node IVC_inspiratory_diameter_less_than_12_mm
+    {
+	label = "IVC inspiratory diameter < 12 mm";
+	position = (398 646);
+	states = ("Yes" "No");
+	HR_NodeSize = "(201, 52)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node IVC_less_than_50_percent
+    {
+	label = "IVC < 50 %";
+	position = (205 642);
+	states = ("Yes" "No");
+	HR_NodeSize = "(125, 46)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node S3
+    {
+	label = "S3";
+	position = (1138 458);
+	states = ("Yes" "No");
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Dyspnoea_on_exertion
+    {
+	label = "Dyspnoea on exertion";
+	position = (1185 312);
+	states = ("Yes" "No");
+	HR_NodeSize = "(142, 39)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Bilateral_leg_oedema
+    {
+	label = "Bilateral leg oedema";
+	position = (327 326);
+	states = ("Yes" "No");
+	HR_NodeSize = "(146, 46)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Hepatomegaly
+    {
+	label = "";
+	position = (437 475);
+	states = ("Yes" "No");
+	HR_NodeSize = "(120, 45)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node JVR
+    {
+	label = "JVR";
+	position = (309 473);
+	states = ("Yes" "No");
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node JVP_above_8_cm
+    {
+	label = "JVP > 8 cm";
+	position = (175 479);
+	states = ("Yes" "No");
+	HR_NodeSize = "(93, 48)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Congestion_R
+    {
+	label = "Congestion (R)";
+	position = (329 127);
+	states = ("Yes" "No");
+	HR_LinkMode = "[JVP_above_8_cm:0][JVR:0][Hepatomegaly:0][Bilateral_leg_oedema:0][IVC_less_than_50_percent:0][IVC_inspiratory_diameter_less_than_12_mm:0]";
+	HR_NodeSize = "(112, 45)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Orthopnea
+    {
+	label = "Orthopnea";
+	position = (1309 312);
+	states = ("Yes" "No");
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node Dyspnoea
+    {
+	label = "Dyspnoea";
+	position = (1041 317);
+	states = ("Yes" "No");
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    node congestion_L
+    {
+	label = "Congestion (L)";
+	position = (1173 121);
+	states = ("Yes" "No");
+	HR_LinkMode = "[Dyspnoea:0][Orthopnea:0][Dyspnoea_on_exertion:0][S3:0][Mitral_inflow_e_wave_velocity_above_50_cm_per_s:0][Lateral_E_e_above_12:0][Deceleration_time_less_than_130_ms:0][Rales:0][Pulmonary_vein_S_D_less_than_1:0][Diffuse_B_lines_lung_ultrasound:0][Mitral_inflow_E_wave_velocity_above_50_cm_per_s:0]";
+	HR_NodeSize = "(106, 45)";
+	HR_Group = "0";
+	HR_Desc = "";
+	HR_State_1 = "";
+	HR_State_0 = "";
+    }
+
+    potential (Diffuse_B_lines_lung_ultrasound | congestion_L)
+    {
+	data = (( 0.857 0.143 )	%  congestion_L=Yes
+		( 0.6 0.4 ));	%  congestion_L=No
+    }
+
+    potential (Pulmonary_vein_S_D_less_than_1 | congestion_L)
+    {
+	data = (( 0.83 0.17 )	%  congestion_L=Yes
+		( 0.28 0.72 ));	%  congestion_L=No
+    }
+
+    potential (Rales | congestion_L)
+    {
+	data = (( 0.13 0.87 )	%  congestion_L=Yes
+		( 0.1 0.9 ));	%  congestion_L=No
+    }
+
+    potential (Deceleration_time_less_than_130_ms | congestion_L)
+    {
+	data = (( 0.81 0.19 )	%  congestion_L=Yes
+		( 0.2 0.8 ));	%  congestion_L=No
+    }
+
+    potential (Lateral_E_e_above_12 | congestion_L)
+    {
+	data = (( 0.66 0.34 )	%  congestion_L=Yes
+		( 0.45 0.55 ));	%  congestion_L=No
+    }
+
+    potential (Mitral_inflow_E_wave_velocity_above_50_cm_per_s | congestion_L)
+    {
+	data = (( 0.92 0.08 )	%  congestion_L=Yes
+		( 0.45 0.28 ));	%  congestion_L=No
+    }
+
+    potential (IVC_inspiratory_diameter_less_than_12_mm | Congestion_R)
+    {
+	data = (( 0.67 0.33 )	%  Congestion_R=Yes
+		( 0.09 0.91 ));	%  Congestion_R=No
+    }
+
+    potential (IVC_less_than_50_percent | Congestion_R)
+    {
+	data = (( 0.12 0.88 )	%  Congestion_R=Yes
+		( 0.73 0.27 ));	%  Congestion_R=No
+    }
+
+    potential (S3 | congestion_L)
+    {
+	data = (( 1 1 )	%  congestion_L=Yes
+		( 1 1 ));	%  congestion_L=No
+    }
+
+    potential (Dyspnoea_on_exertion | congestion_L)
+    {
+	data = (( 0.66 0.34 )	%  congestion_L=Yes
+		( 0.48 0.52 ));	%  congestion_L=No
+    }
+
+    potential (Bilateral_leg_oedema | Congestion_R)
+    {
+	data = (( 0.94 0.06 )	%  Congestion_R=Yes
+		( 0.9 0.1 ));	%  Congestion_R=No
+    }
+
+    potential (Hepatomegaly | Congestion_R)
+    {
+	data = (( 0.51 0.49 )	%  Congestion_R=Yes
+		( 0.38 0.62 ));	%  Congestion_R=No
+    }
+
+    potential (JVR | Congestion_R)
+    {
+	data = (( 1 1 )	%  Congestion_R=Yes
+		( 1 1 ));	%  Congestion_R=No
+    }
+
+    potential (JVP_above_8_cm | Congestion_R)
+    {
+	data = (( 0.48 0.52 )	%  Congestion_R=Yes
+		( 0.22 0.78 ));	%  Congestion_R=No
+    }
+
+    potential (Congestion_R)
+    {
+	data = ( 1 1 );
+    }
+
+    potential (Orthopnea | congestion_L)
+    {
+	data = (( 0.66 0.34 )	%  congestion_L=Yes
+		( 0.53 0.47 ));	%  congestion_L=No
+    }
+
+    potential (Dyspnoea | congestion_L)
+    {
+	data = (( 0.5 0.5 )	%  congestion_L=Yes
+		( 0.17 0.73 ));	%  congestion_L=No
+    }
+
+    potential (congestion_L)
+    {
+	data = ( 1 1 );
+    }
+} % class Model_Mullens_et_al_2019_6_5_2021
