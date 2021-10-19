@@ -12,11 +12,11 @@ library("ggnewscale")
 
 # Data
 
-data <- read_sav("C:\\Users\\P70070766\\Documents\\AID-HF\\4. TIME-CHF\\1. Data\\TIME_CHF_all_correct_follow_up.sav")
+data <- read_sav(".\\TIME_CHF_all_correct_follow_up.sav")
 colnames(data)[1] <- "id"
 data <- subset(data, Withdrawn != 1)
 
-data.loop_diuretics <- read_excel("C:\\Users\\P70070766\\Documents\\AID-HF\\4. TIME-CHF\\1. Data\\Medication daily doses.xlsx", sheet = 6)
+data.loop_diuretics <- read_excel(".\\Medication daily doses.xlsx", sheet = 6)
 colnames(data.loop_diuretics)[1] <- "id"
 table(data$id %in% data.loop_diuretics$id)
 data.loop_diuretics <- merge(data[,c("id", 
@@ -25,7 +25,7 @@ data.loop_diuretics <- merge(data[,c("id",
                              by = "id")
 data.loop_diuretics <- subset(data.loop_diuretics, Withdrawn != 1)
 
-data.hospitalisations <- read_excel("C:\\Users\\P70070766\\Documents\\AID-HF\\4. TIME-CHF\\1. Data\\Hospitalisations overview.xlsx")
+data.hospitalisations <- read_excel(".\\Hospitalisations overview.xlsx")
 colnames(data.hospitalisations)[1] <- "id"
 table(unique(data.hospitalisations$id) %in% data$id)
 data.hospitalisations <- merge(data[,c("id", 
