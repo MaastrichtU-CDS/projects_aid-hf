@@ -571,6 +571,131 @@ ggplot(data.merged.540.plot, aes(x = Dx, y = id, fill = plot)) +
 
 # 30-day slots
 
+data.timeslots <- data.merged.540
+
+data.timeslots$stop.up <- ifelse(data.timeslots$dose_change.qualitative_indicator == "Up-titration",
+                                 "Up-titration",
+                                 0)
+data.timeslots$stop.down <- ifelse(data.timeslots$dose_change.qualitative_indicator == "Down-titration",
+                                   "Down-titration",
+                                   0)
+data.timeslots$stop.CHF_hospitalisation <- ifelse(data.timeslots$CHF_hospitalisation_indicator == 1,
+                                                  "Hospitalisation: CHF",
+                                                  0)
+data.timeslots$stop.deceased <- ifelse(data.timeslots$deceased_indicator == 1,
+                                       "Deceased",
+                                       0)
+data.timeslots$stop <- data.timeslots$stop.up
+data.timeslots$stop <- ifelse(data.timeslots$stop.down == "Down-titration",
+                              "Down-titration",
+                              data.timeslots$stop)
+data.timeslots$stop <- ifelse(data.timeslots$stop.CHF_hospitalisation == "Hospitalisation: CHF",
+                              "Hospitalisation: CHF",
+                              data.timeslots$stop)
+data.timeslots$stop <- ifelse(data.timeslots$stop.deceased == "Deceased",
+                              "Deceased",
+                              data.timeslots$stop)
+data.timeslots$stop <- ifelse(data.timeslots$stop == 0,
+                              "No change",
+                              data.timeslots$stop)
+
+counts.list <- tapply(data.timeslots$stop, list(data.timeslots$id), FUN = rle)
+counts <- rbindlist(counts.list, use.names = TRUE, idcol = "id")
+
+#
+
+counts$length_above_30 <- apply(counts, 1, function(counts) { as.numeric(counts[2]) / 30 })
+counts$length_above_30 <- ifelse(counts$length_above_30 <= 1,
+                                 FALSE,
+                                 TRUE)
+
+counts.length_below_or_equal_to_30 <- subset(counts, length_above_30 == FALSE)
+counts.length_above_30 <- subset(counts, length_above_30 == TRUE)
+
+counts.length_above_30$length_minus_30 <- counts.length_above_30$lengths - 30
+
+id.lengths <- counts.length_above_30[, c("id", "length_minus_30")] 
+colnames(id.lengths)[2] <- "lengths" 
+
+counts.30_day_lengths <- rbind(counts.length_below_or_equal_to_30, 
+                               id.lengths,
+                               fill = TRUE)
+
+#
+
+# counts_30days
+# id  | baseline_state | end_state      | length
+# xxx | no_change      | down_titration |  5
+# xxx | down_titration | no_change      | 30
+# xxx | no_change      | no_change      | 30
+# xxx | no_change      | down_titration | 10
+# 
+
+counts_30days <- data.frame(matrix(ncol = 4, nrow = 0))
+names_counts_30days <- c("id", "baseline_state", "end_state", "length")
+colnames(counts_30days) <- names_counts_30days
+
+while(i < nrow(counts)) {
+  current_id = counts$id[i];
+  current_state <- counts$values[i]
+  next_state <- counts$values[i+1]
+  # loop through different ids
+  while(current_state != "")
+  {
+    length_timespan < - counts$lengths[i]
+    
+    # divide long time spans into 30 day time spans
+    while(length_timespan > 0)
+    {
+      
+      if(current_state == "no change")
+      {
+        # Add row to data frame
+        counts_30days<- rbind(counts_30days, data.frame(id = current_id, baseline_state = current_state, end_state = ifelse(length_timespan>30, current_state, next_state), length= min(length_timespan, 30)));
+      }
+      else if (current_state == "down titration" || current_state == "up titration")
+      {
+        if(next_state == "no_change")
+        {
+          # Sum current down titration + no_change days, unless it's a hospitalisation
+          length_timespan<- length_timespan +counts$length[i+1];
+          # If the combined timespan is shorther than 30 days, look in the next row
+          if(length_timespan <= 30)
+          {
+            # skip the "no change" line
+            i <- i + 1;
+            next_state <- counts$values[i+1];
+          }
+          
+          # Add row to data frame
+          counts_30days<- rbind(counts_30days, data.frame(id = current_id, baseline_state = current_state, end_state = next_state, length= min(length_timespan, 30)));
+          
+          # If the "no change" time span is > 30 days, next row should be "no change" with the updated time span length 
+          if(length_timespan > 30)
+          {
+            i <- i + 1;
+            current_state = counts$values[i];
+            next_state <- counts$values[i+1];
+          }
+        }else
+        {
+          # Add row to data frame
+          counts_30days<- rbind(counts_30days, data.frame(id = current_id, baseline_state = current_state, end_state = next_state, length= min(length_timespan, 30)));
+        }
+        
+      }
+      length_timespan <- length_timespan - 30;
+    }
+    i<-i+1;
+    current_state = counts$values[i];
+    next_state <- counts$values[i+1];
+  }
+  i<-i+1;
+}
+
+
+
+
 
 
 
