@@ -11,6 +11,7 @@ library("data.table")
 library("labelled")
 library('tidymodels')
 library('labelled')
+library('easyGgplot2')
 
 ####################################################################################################################
 
@@ -20,6 +21,8 @@ data <- read_sav(".\\TIME_CHF_all_correct_follow_up.sav")
 colnames(data)[1] <- "id"
 data <- subset(data, Withdrawn != 1)
 data <- data[order(c(data$id)),]
+
+data$diff_refdate_entrydate <- as.numeric(difftime(data$Dateofstudyentry, data$RefDate, units = c("days")))
 
 # Diuretics
 data.loop_diuretics <- read_excel(".\\Medication daily doses.xlsx", sheet = 6)
@@ -37,12 +40,11 @@ data.hospitalisations <- read_excel(".\\1. Data\\Hospitalisations overview.xlsx"
 colnames(data.hospitalisations)[1] <- "id"
 table(unique(data.hospitalisations$id) %in% data$id)
 data.hospitalisations <- merge(data[,c("id", 
-                                       "Withdrawn")], 
+                                       "Withdrawn", "RefDate")], 
                                data.hospitalisations, 
                                by = "id")
 data.hospitalisations <- subset(data.hospitalisations, Withdrawn != 1)
-data.hospitalisations <- data.hospitalisations[order(c(data.hospitalisations$id)),]
-table(unique(data.hospitalisations$id) %in% data$id)
+data.hospitalisations <- data.hospitalisations[order(c(data.hospitalisations$id)),]$table(unique(data.hospitalisations$id) %in% data$id)
 
 
 # Symptoms at visits
@@ -224,12 +226,17 @@ data.hospitalisations$cause.CHF <- ifelse(data.hospitalisations$"Cause of Hospit
                                           "Worsening CHF", 
                                           1, 
                                           0)
-data.hospitalisations$cause.renal <- ifelse(data.hospitalisations$"Cause of Hospitalisation" 
-                                          == 
-                                            "Renal failure", 
+data.hospitalisations$cause.linked <- ifelse(data.hospitalisations$"Cause of Hospitalisation" 
+                                            %in% 
+                                            c('Trauma / fracture', 'Syncope/Tachyarrhythmias', 'Syncope/Hypotension', 'Stroke', 'Syncope unknown'), 
                                           1, 
                                           0)
 
+data.hospitalisations$cause.renal <- ifelse(data.hospitalisations$"Cause of Hospitalisation" 
+                                            == 
+                                              "Renal failure", 
+                                            1, 
+                                            0)
 
 data.hospitalisations$cause.planned <- ifelse(as.numeric(rownames(data.hospitalisations)) 
                                               %in% 
@@ -242,8 +249,7 @@ data.hospitalisations$cause.other <- ifelse((data.hospitalisations$cause.CHF != 
                                             1, 
                                             0)
 
-data.hospitalisations.merged <- subset(data, select = c("id", 
-                                                        "RefDate"))
+data.hospitalisations.merged <- subset(data, select = c("id"))
 data.hospitalisations.merged <- merge(data.hospitalisations.merged, data.hospitalisations, 
                                       by = "id", 
                                       all.x = TRUE, 
@@ -252,6 +258,7 @@ data.hospitalisations.merged <- subset(data.hospitalisations.merged, select = c(
                                                                                 "cause.CHF", 
                                                                                 "cause.renal",
                                                                                 "cause.planned", 
+                                                                                "cause.linked",
                                                                                 "cause.other",
                                                                                 "RefDate", 
                                                                                 "Date of Admission", 
@@ -275,6 +282,7 @@ data.hospitalisations.merged <- subset(data.hospitalisations.merged,
                                                   "cause.CHF", 
                                                   "cause.renal",
                                                   "cause.planned", 
+                                                  "cause.linked", 
                                                   "cause.other", 
                                                   "deceased_indicator.overall", 
                                                   "Dx.admission", 
@@ -886,40 +894,42 @@ time_horizon <- 30
 
 dose_change_days <- id.Dx_minus_Dy.dose_change.qualitative_indicator.Dx[id.Dx_minus_Dy.dose_change.qualitative_indicator.Dx$dose_change.qualitative_indicator == 'Up-titration' | 
                                                                           id.Dx_minus_Dy.dose_change.qualitative_indicator.Dx$dose_change.qualitative_indicator == 'Down-titration' ,]
-
+dose_change_days$Dx <- dose_change_days$Dx+1
 data.dose_change_after_visit <- data.frame(data$id, BL = rep(NA, nrow(data)), V1 = rep(NA, nrow(data)), V3 = rep(NA, nrow(data)), V6 = rep(NA, nrow(data)), V12 = rep(NA, nrow(data)), V18 = rep(NA, nrow(data)),
                                            BL_change = rep(NA, nrow(data)), V1_change = rep(NA, nrow(data)), V3_change = rep(NA, nrow(data)), V6_change = rep(NA, nrow(data)), V12_change = rep(NA, nrow(data)), V18_change = rep(NA, nrow(data)))
 
 
 data.hospit_CHF_after_visit <- data.frame(data$id, BL = rep(0, nrow(data)), V1 = ifelse(is.na(data$V1), NA, 0), V3 = ifelse(is.na(data$V3), NA, 0), V6 = ifelse(is.na(data$V6), NA, 0), V12 = ifelse(is.na(data$V12), NA, 0), V18 = ifelse(is.na(data$V18), NA, 0))
 data.hospit_renal_after_visit <- data.frame(data$id, BL = rep(0, nrow(data)), V1 = ifelse(is.na(data$V1), NA, 0), V3 = ifelse(is.na(data$V3), NA, 0), V6 = ifelse(is.na(data$V6), NA, 0), V12 = ifelse(is.na(data$V12), NA, 0), V18 = ifelse(is.na(data$V18), NA, 0))
+data.hospit_linked_after_visit <- data.frame(data$id, BL = rep(0, nrow(data)), V1 = ifelse(is.na(data$V1), NA, 0), V3 = ifelse(is.na(data$V3), NA, 0), V6 = ifelse(is.na(data$V6), NA, 0), V12 = ifelse(is.na(data$V12), NA, 0), V18 = ifelse(is.na(data$V18), NA, 0))
 data.death_after_visit <- data.frame(data$id, death = as.numeric(difftime(data$Dateofdeath, data$RefDate, units = "days")), BL = rep(NA, nrow(data)), V1 = rep(NA, nrow(data)), V3 = rep(NA, nrow(data)), V6 = rep(NA, nrow(data)), V12 = rep(NA, nrow(data)), V18 = rep(NA, nrow(data)))
-
 
 data.death_after_visit$BL <- ifelse(data$Death == 0 | data.death_after_visit$death > time_horizon, 0,1)
 
 data.death_after_visit$V1 <- ifelse(data$Death == 0 | data.death_after_visit$death < data$V1 |
-                                      data.death_after_visit$death > data$V1 + time_horizon, 0, 1)
+                                      data.death_after_visit$death > time_horizon, 0, data.death_after_visit$death - data$V1)
 data.death_after_visit$V3 <- ifelse(data$Death == 0 | data.death_after_visit$death < data$V3 |
-                                      data.death_after_visit$death > data$V3 + time_horizon, 0, 1)
+                                      data.death_after_visit$death > data$V3 + time_horizon, 0, data.death_after_visit$death - data$V3)
 data.death_after_visit$V6 <- ifelse(data$Death == 0 | data.death_after_visit$death < data$V6 |
-                                      data.death_after_visit$death > data$V6 + time_horizon, 0, 1)
+                                      data.death_after_visit$death > data$V6 + time_horizon, 0, data.death_after_visit$death - data$V6)
 data.death_after_visit$V12 <- ifelse(data$Death == 0 | data.death_after_visit$death < data$V12 |
-                                      data.death_after_visit$death > data$V12 + time_horizon, 0, 1)
+                                       data.death_after_visit$death > data$V12 + time_horizon, 0, data.death_after_visit$death - data$V12)
 data.death_after_visit$V18 <- ifelse(data$Death == 0 | data.death_after_visit$death < data$V18 |
-                                      data.death_after_visit$death > data$V18 + time_horizon, 0, 1)
+                                       data.death_after_visit$death > data$V18 + time_horizon, 0, data.death_after_visit$death - data$V18)
 
 for(i in 1:nrow(data))
 {
   current_id <- data$id[i];
   
-  data.dose_change_after_visit$BL[i] <- min(with(dose_change_days, Dx[id == current_id & Dx > 0 & Dx <= time_horizon ]), na.rm = TRUE);
-  data.dose_change_after_visit$V1[i] <- min(with(dose_change_days, Dx[id == current_id & Dx > data$V1[data$id == current_id] & Dx <= data$V1[data$id == current_id]+time_horizon ]), na.rm = TRUE);
+  # Day of first dose change after follow up visit
+  data.dose_change_after_visit$BL[i] <- min(with(dose_change_days, Dx[id == current_id & Dx > data$diff_refdate_entrydate[i] & Dx <= time_horizon ]), na.rm = TRUE);
+  data.dose_change_after_visit$V1[i] <- min(with(dose_change_days, Dx[id == current_id & Dx > data$V1[data$id == current_id] & Dx <= data$V1[data$id == current_id]+time_horizon]), na.rm = TRUE);
   data.dose_change_after_visit$V3[i] <- min(with(dose_change_days, Dx[id == current_id & Dx > data$V3[data$id == current_id] & Dx <= data$V3[data$id == current_id]+time_horizon]), na.rm = TRUE);
   data.dose_change_after_visit$V6[i] <- min(with(dose_change_days, Dx[id == current_id & Dx > data$V6[data$id == current_id] & Dx <= data$V6[data$id == current_id]+time_horizon]), na.rm = TRUE);
   data.dose_change_after_visit$V12[i] <- min(with(dose_change_days, Dx[id == current_id & Dx > data$V12[data$id == current_id] & Dx <= data$V12[data$id == current_id]+time_horizon]), na.rm = TRUE);
   data.dose_change_after_visit$V18[i] <- min(with(dose_change_days, Dx[id == current_id & Dx > data$V18[data$id == current_id] & Dx <= data$V18[data$id == current_id]+time_horizon]), na.rm = TRUE);
   
+  # Direction of change
   data.dose_change_after_visit$BL_change[i] <- ifelse(is.infinite(data.dose_change_after_visit$BL[i]), 'No change', 
                                                       with(dose_change_days, as.character(dose_change.qualitative_indicator[id == current_id & Dx == data.dose_change_after_visit$BL[i]])));
   data.dose_change_after_visit$V1_change[i] <- ifelse(is.na(data.dose_change_after_visit$V1[i]), NA, ifelse(is.infinite(data.dose_change_after_visit$V1[i]), 'No change', 
@@ -932,44 +942,65 @@ for(i in 1:nrow(data))
                                                       with(dose_change_days, as.character(dose_change.qualitative_indicator[id == current_id & Dx == data.dose_change_after_visit$V12[i]]))));
   data.dose_change_after_visit$V18_change[i] <- ifelse(is.na(data.dose_change_after_visit$V18[i]), NA, ifelse(is.infinite(data.dose_change_after_visit$V18[i]), 'No change', 
                                                       with(dose_change_days, as.character(dose_change.qualitative_indicator[id == current_id & Dx == data.dose_change_after_visit$V18[i]]))));
-
-  data.hospit_CHF_after_visit$BL[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF] <= time_horizon)), 1,0);
+  # Hospitalisation: Worsening CHF
+  data.hospit_CHF_after_visit$BL[i] <-dplyr::first(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF] > data$diff_refdate_entrydate[i] & 
+                                                    Dx.admission[id == current_id & cause.CHF] <= data$diff_refdate_entrydate[i] + time_horizon), default = 0);
   # If the followup is shorter than the time horizon, censor it
-  data.hospit_CHF_after_visit$BL[i] <- ifelse(data.hospit_CHF_after_visit$BL[i] != 1 & data$FU[i] < time_horizon, NA, ifelse(is.na(data.hospit_CHF_after_visit$BL[i]),0, data.hospit_CHF_after_visit$BL[i]))
+  data.hospit_CHF_after_visit$BL[i] <- ifelse(data.hospit_CHF_after_visit$BL[i] == 0 & data$FU[i] < time_horizon, NA, ifelse(is.na(data.hospit_CHF_after_visit$BL[i]),0, data.hospit_CHF_after_visit$BL[i]))
     
-  data.hospit_CHF_after_visit$V1[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V1[data$id == current_id] && 
-                                                         Dx.admission[id == current_id & cause.CHF] <= (data$V1[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_CHF_after_visit$V1[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V1[data$id == current_id] & 
+                                                         Dx.admission[id == current_id & cause.CHF] <= data$V1[data$id == current_id] + time_horizon)), 1,0);
   data.hospit_CHF_after_visit$V1[i] <- ifelse(data.hospit_CHF_after_visit$V1[i] != 1 & data$FU[i] < data$V1[i] + time_horizon, NA, ifelse(is.na(data.hospit_CHF_after_visit$V1[i]),0, data.hospit_CHF_after_visit$V1[i]))
-  data.hospit_CHF_after_visit$V3[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V3[data$id == current_id] && 
-                                                         Dx.admission[id == current_id & cause.CHF] <= (data$V3[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_CHF_after_visit$V3[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V3[data$id == current_id] &
+                                                         Dx.admission[id == current_id & cause.CHF] <= data$V3[data$id == current_id] + time_horizon)), 1,0);
   data.hospit_CHF_after_visit$V3[i] <- ifelse(data.hospit_CHF_after_visit$V3[i] != 1 & data$FU[i] < data$V3[i] + time_horizon, NA, ifelse(is.na(data.hospit_CHF_after_visit$V3[i]),0, data.hospit_CHF_after_visit$V3[i]))
-  data.hospit_CHF_after_visit$V6[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V6[data$id == current_id] && 
-                                                         Dx.admission[id == current_id & cause.CHF] <= (data$V6[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_CHF_after_visit$V6[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V6[data$id == current_id] &
+                                                         Dx.admission[id == current_id & cause.CHF] <= data$V6[data$id == current_id] + time_horizon)), 1,0);
   data.hospit_CHF_after_visit$V6[i] <- ifelse(data.hospit_CHF_after_visit$V6[i] != 1 & data$FU[i] < data$V6[i] + time_horizon, NA, ifelse(is.na(data.hospit_CHF_after_visit$V6[i]),0, data.hospit_CHF_after_visit$V6[i]))
-  data.hospit_CHF_after_visit$V12[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V12[data$id == current_id] && 
-                                                         Dx.admission[id == current_id & cause.CHF] <= (data$V12[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_CHF_after_visit$V12[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V12[data$id == current_id] &
+                                                         Dx.admission[id == current_id & cause.CHF] <= data$V12[data$id == current_id] + time_horizon)), 1,0);
   data.hospit_CHF_after_visit$V12[i] <- ifelse(data.hospit_CHF_after_visit$V12[i] != 1 & data$FU[i] < data$V12[i] + time_horizon, NA, ifelse(is.na(data.hospit_CHF_after_visit$V12[i]),0, data.hospit_CHF_after_visit$V12[i]))
-  data.hospit_CHF_after_visit$V18[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V18[data$id == current_id] && 
-                                                         Dx.admission[id == current_id & cause.CHF] <= (data$V18[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_CHF_after_visit$V18[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.CHF == 1] > data$V18[data$id == current_id] &
+                                                         Dx.admission[id == current_id & cause.CHF] <= data$V18[data$id == current_id] + time_horizon)), 1,0);
   data.hospit_CHF_after_visit$V18[i] <- ifelse(data.hospit_CHF_after_visit$V18[i] != 1 & data$FU[i] < data$V18[i] + time_horizon, NA, ifelse(is.na(data.hospit_CHF_after_visit$V18[i]),0, data.hospit_CHF_after_visit$V18[i]))
   
+  # Hospitalisation: renal  
   data.hospit_renal_after_visit$BL[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal] <= time_horizon)), 1,0);
   data.hospit_renal_after_visit$BL[i] <- ifelse(data$FU[i] < time_horizon, NA, ifelse(is.na(data.hospit_renal_after_visit$BL[i]),0, data.hospit_renal_after_visit$BL[i]))
-  data.hospit_renal_after_visit$V1[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V1[data$id == current_id] && 
+  data.hospit_renal_after_visit$V1[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V1[data$id == current_id] &
                                                          Dx.admission[id == current_id & cause.renal] <= (data$V1[data$id == current_id] + time_horizon))), 1,0);
   data.hospit_renal_after_visit$V1[i] <- ifelse(data$FU[i] < data$V1[i] + time_horizon, NA, ifelse(is.na(data.hospit_renal_after_visit$V1[i]),0, data.hospit_renal_after_visit$V1[i]))
-  data.hospit_renal_after_visit$V3[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V3[data$id == current_id] && 
+  data.hospit_renal_after_visit$V3[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V3[data$id == current_id] &
                                                          Dx.admission[id == current_id & cause.renal] <= (data$V3[data$id == current_id] + time_horizon))), 1,0);
   data.hospit_renal_after_visit$V3[i] <- ifelse(data$FU[i] < data$V3[i] + time_horizon, NA, ifelse(is.na(data.hospit_renal_after_visit$V3[i]),0, data.hospit_renal_after_visit$V3[i]))
-  data.hospit_renal_after_visit$V6[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V6[data$id == current_id] && 
+  data.hospit_renal_after_visit$V6[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V6[data$id == current_id] &
                                                          Dx.admission[id == current_id & cause.renal] <= (data$V6[data$id == current_id] + time_horizon))), 1,0);
   data.hospit_renal_after_visit$V6[i] <- ifelse(data$FU[i] < data$V6[i] + time_horizon, NA, ifelse(is.na(data.hospit_renal_after_visit$V6[i]),0, data.hospit_renal_after_visit$V6[i]))
-  data.hospit_renal_after_visit$V12[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V12[data$id == current_id] && 
+  data.hospit_renal_after_visit$V12[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V12[data$id == current_id] &
                                                           Dx.admission[id == current_id & cause.renal] <= (data$V12[data$id == current_id] + time_horizon))), 1,0);
   data.hospit_renal_after_visit$V12[i] <- ifelse(data$FU[i] < data$V12[i] + time_horizon, NA, ifelse(is.na(data.hospit_renal_after_visit$V12[i]),0, data.hospit_renal_after_visit$V12[i]))
-  data.hospit_renal_after_visit$V18[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V18[data$id == current_id] && 
+  data.hospit_renal_after_visit$V18[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.renal == 1] > data$V18[data$id == current_id] &
                                                           Dx.admission[id == current_id & cause.renal] <= (data$V18[data$id == current_id] + time_horizon))), 1,0);
   data.hospit_renal_after_visit$V18[i] <- ifelse(data$FU[i] < data$V18[i] + time_horizon, NA, ifelse(is.na(data.hospit_renal_after_visit$V18[i]),0, data.hospit_renal_after_visit$V18[i]))
+
+  # Hospitalisation: linked  
+  data.hospit_linked_after_visit$BL[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.linked] <= time_horizon)), 1,0);
+  data.hospit_linked_after_visit$BL[i] <- ifelse(data$FU[i] < time_horizon, NA, ifelse(is.na(data.hospit_linked_after_visit$BL[i]),0, data.hospit_linked_after_visit$BL[i]))
+  data.hospit_linked_after_visit$V1[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.linked == 1] > data$V1[data$id == current_id] &
+                                                           Dx.admission[id == current_id & cause.linked] <= (data$V1[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_linked_after_visit$V1[i] <- ifelse(data$FU[i] < data$V1[i] + time_horizon, NA, ifelse(is.na(data.hospit_linked_after_visit$V1[i]),0, data.hospit_linked_after_visit$V1[i]))
+  data.hospit_linked_after_visit$V3[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.linked == 1] > data$V3[data$id == current_id] &
+                                                           Dx.admission[id == current_id & cause.linked] <= (data$V3[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_linked_after_visit$V3[i] <- ifelse(data$FU[i] < data$V3[i] + time_horizon, NA, ifelse(is.na(data.hospit_linked_after_visit$V3[i]),0, data.hospit_linked_after_visit$V3[i]))
+  data.hospit_linked_after_visit$V6[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.linked == 1] > data$V6[data$id == current_id] &
+                                                           Dx.admission[id == current_id & cause.linked] <= (data$V6[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_linked_after_visit$V6[i] <- ifelse(data$FU[i] < data$V6[i] + time_horizon, NA, ifelse(is.na(data.hospit_linked_after_visit$V6[i]),0, data.hospit_linked_after_visit$V6[i]))
+  data.hospit_linked_after_visit$V12[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.linked == 1] > data$V12[data$id == current_id] &
+                                                            Dx.admission[id == current_id & cause.linked] <= (data$V12[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_linked_after_visit$V12[i] <- ifelse(data$FU[i] < data$V12[i] + time_horizon, NA, ifelse(is.na(data.hospit_linked_after_visit$V12[i]),0, data.hospit_linked_after_visit$V12[i]))
+  data.hospit_linked_after_visit$V18[i] <- ifelse(any(with(data.hospitalisations.merged, Dx.admission[id == current_id & cause.linked == 1] > data$V18[data$id == current_id] &
+                                                            Dx.admission[id == current_id & cause.linked] <= (data$V18[data$id == current_id] + time_horizon))), 1,0);
+  data.hospit_linked_after_visit$V18[i] <- ifelse(data$FU[i] < data$V18[i] + time_horizon, NA, ifelse(is.na(data.hospit_linked_after_visit$V18[i]),0, data.hospit_linked_after_visit$V18[i]))
   
 }
 
@@ -1017,15 +1048,14 @@ Cause_HF <- rep(to_character(data$Cause_HF), 6)
 data.h <- data.frame(pat_id, Gender, Cause_HF)
                 
 # Visit data
-# data.h$Fluid_level <- as.character(cut(with(data.congention_score, c(CCS, CCS1, CCS3, CCS6, CCS12, CCS18)), 
-#                                        breaks = c(0,1,2,3,4,5),
-#                                        labels = c("Very Low", "Low", "Average", "High", "Very High"), include.lowest = TRUE, right = FALSE))
-# data.h$Fluid_level <- discretise_quantiles(with(data, c(Own_congestionscore_BL, 
-#                                                         Own_congestionscore_1, 
-#                                                         Own_congestionscore_3, 
-#                                                         Own_congestionscore_6, 
-#                                                         Own_congestionscore_12, 
-#                                                         Own_congestionscore_18)), labels = c("Very Low", "Low", "Average", "High", "Very High"))
+#fluid_level <- with(data.congention_score, c(CCS, CCS1, CCS3, CCS6, CCS12, CCS18))
+
+fluid_level <- with(data, c(Own_congestionscore_BL,
+                            Own_congestionscore_1,
+                            Own_congestionscore_3,
+                            Own_congestionscore_6,
+                            Own_congestionscore_12,
+                            Own_congestionscore_18))
 # fluid_level <- with(data.new_congestion_scores,
 #                     c(Clinical_congestion_score_BL,
 #                       Clinical_congestion_score_1,
@@ -1034,17 +1064,19 @@ data.h <- data.frame(pat_id, Gender, Cause_HF)
 #                       Clinical_congestion_score_12,
 #                       Clinical_congestion_score_18))
 
-fluid_level <- with(data.new_congestion_scores,
-                    c(Combined_congestion_score_BL,
-                      Combined_congestion_score_1,
-                      Combined_congestion_score_3,
-                      Combined_congestion_score_6,
-                      Combined_congestion_score_12,
-                      Combined_congestion_score_18))
+# fluid_level <- with(data.new_congestion_scores,
+#                     c(Combined_congestion_score_BL,
+#                       Combined_congestion_score_1,
+#                       Combined_congestion_score_3,
+#                       Combined_congestion_score_6,
+#                       Combined_congestion_score_12,
+#                       Combined_congestion_score_18))
 
 data.h$Fluid_level_cont <- fluid_level
 
 data.h$Fluid_level <- discretise_quantiles(fluid_level, labels = c("Very Low", "Low", "Average", "High", "Very High"))
+
+# data.h$Fluid_level <- as.character(cut(fluid_level, c(0,1,2,3,4,7), labels = c("Very Low", "Low", "Average", "High", "Very High")), include.lowest = TRUE) 
 
 data.h$Heart_rate <- discretise_quantiles(with(data, c(HR, HR1, HR3, HR6, HR12, HR18)),
                                           labels = c("Very Low", "Low", "Average", "High", "Very High"))
@@ -1076,7 +1108,7 @@ data.h$Syncope <- recode(dplyr::na_if(with(data.symptoms, c(Syncope_BL, Syncope1
                          '0' = 'no', '1' = 'yes')
 data.h$Exercise_intolerance <- recode(dplyr::na_if(with(data.symptoms, c(ExIntol_BL, ExIntol1, ExIntol3, ExIntol6, ExIntol12, ExIntol18)), 9),
                                                    '0' = 'Grade 0', '1' = 'Grade 1', '2' = 'Grade 2', '3' = 'Grade 3')
-data.h$Oedema <- recode(dplyr::na_if(with(data.symptoms, c(Edema, Edema1, Edema3, Edema6, Edema12, Edema18)), 9),
+data.h$Oedema <- recode(dplyr::na_if(with(data.symptoms, c(EdemaHist_BL, EdemaHist1, EdemaHist3, EdemaHist6, EdemaHist12, EdemaHist18)), 9),
                                   '0' = 'Grade 0', '1' = 'Grade 1', '2' = 'Grade 2', '3' = 'Grade 3')
 
 data.h$CRP_cont <- with(data, c(hsCRP_BL, hsCRP_V1, hsCRP_V3, hsCRP_V6, hsCRP_V12, hsCRP_V18))
@@ -1117,6 +1149,7 @@ data.h$Death <- with(data.death_after_visit, recode(c(BL, V1, V3, V6, V12, V18),
 
 data.h$Hospitalisation_CHF <- with(data.hospit_CHF_after_visit, recode(c(BL, V1, V3, V6, V12, V18), '0' = 'no', '1' = 'yes'))
 data.h$Hospitalisation_Renal_Failure <- with(data.hospit_renal_after_visit, recode(c(BL, V1, V3, V6, V12, V18), '0' = 'no', '1' = 'yes'))
+data.h$Hospitalisation_Linked <- with(data.hospit_linked_after_visit, recode(c(BL, V1, V3, V6, V12, V18), '0' = 'no', '1' = 'yes'))
 
 # Remove censored datapoints
 data.h <- data.h[!is.na(with(data, c(rep(0, nrow(data)), V1, V3, V6, V12, V18))),]
@@ -1124,7 +1157,7 @@ data.h <- data.h[!is.na(with(data, c(rep(0, nrow(data)), V1, V3, V6, V12, V18)))
 # Mutate missing values to Hugin format
 #data.h <- mutate_all(data.h, ~if_else(is.na(.), '<EMPTY>', .)) 
 
-write.csv(data.h, "Hugin-TIME-CHF-visits-ClinicalCS.dat", row.names = FALSE)
+write.csv(data.h, "Hugin-TIME-CHF-visits-OwnCS.dat", row.names = FALSE)
 
 # Add periods (yes, I know this duplicates some data)
 data.h.periods <- data.frame(Intervention = counts_periods$baseline_state, Dose_adjustment = counts_periods$end_state,
@@ -1325,44 +1358,141 @@ summary(logr_death_GFR)
 
 
 ################################################################################
-# Relationship between dose changes and symptoms
+# Relationship between dose changes and symptoms / congestion scores (baseline vs month 1)
 ################################################################################
 
-with(data,(table(Fatigue, Fatigue1, Diuretics_recom_BL)))
-with(data,(table(Orthopnea_BL, Orthopnea1, Diuretics_recom_BL)))
-with(data,(table(PND_BL, PND1, Diuretics_recom_BL)))
-with(data,(table(Nocturia_BL, Nocturia1, Diuretics_recom_BL)))
-with(data,(table(Cough_BL, Cough1, Diuretics_recom_BL)))
-with(data,(table(Constipation_BL, Constip1, Diuretics_recom_BL)))
-with(data,(table(RedMemory_BL, RedMemory1, Diuretics_recom_BL)))
-with(data,(table(Dizziness_BL, Dizziness1, Diuretics_recom_BL)))
-with(data,(table(Orthostasis_BL, Orthostasis1, Diuretics_recom_BL)))
-with(data,(table(Syncope_BL, Syncope1, Diuretics_recom_BL)))
-with(data,(table(ExIntol_BL, ExIntol1, Diuretics_recom_BL)))
-with(data,(table(Edema, Diuretics_recom_BL, Edema1))/rowSums(table(Edema, Diuretics_recom_BL, Edema1)))
+## Edema
+tibble.edema_BL1_by_intervention <- data.frame(intervention = data$Diuretics_recom_BL, edema_1 = data$Edema1, edema_bl = data$Edema) %>%
+  group_by(intervention) %>%
+  summarise(bl_mean = mean(edema_bl, na.rm = TRUE), 
+            m1_mean = mean(edema_1, na.rm = TRUE),
+            diff_mean = mean(edema_1 - edema_bl, na.rm = TRUE),
+            n = n())
+write.csv(tibble.edema_BL1_by_intervention, "tibble.edema_BL1_by_intervention.csv", row.names = FALSE)
+tibble.edemahist_BL1_by_intervention <- data.frame(intervention = data$Diuretics_recom_BL, edema_1 = data$EdemaHist1, edema_bl = data$EdemaHistory) %>%
+  group_by(intervention) %>%
+  summarise(bl_mean = mean(edema_bl, na.rm = TRUE), 
+            m1_mean = mean(edema_1, na.rm = TRUE),
+            diff_mean = mean(edema_1 - edema_bl, na.rm = TRUE),
+            n = n())
+write.csv(tibble.edemahist_BL1_by_intervention, "tibble.edemahist_BL1_by_intervention.csv", row.names = FALSE)
 
-summary(glm(data.new_congestion_scores$Combined_congestion_score_1 ~ data$Diuretics_recom_BL + data.new_congestion_scores$Combined_congestion_score_BL))
+# ggplot2.scatterplot(data=data, xName='Edema',yName='Edema1', 
+#                     groupName='Diuretics_recom_BL', size=3,
+#                     backgroundColor="white",
+#                     groupColors=c('#999999','#E69F00', '#56B4E9')) 
+# 
+# ggplot(data.frame(table(data$Edema, data$Edema1, data$Diuretics_recom_BL)), aes(x = Var1, y = Var2,
+#                       size = Freq,
+#                       color = Var3))+
+#             geom_point(alpha = 0.7)+
+#             scale_size(range = c(0.1, 10), name = "N")
 
-summary(glm(data.new_congestion_scores$Combined_congestion_score_1 ~ data$Loop_dose_BL1 + data.new_congestion_scores$Combined_congestion_score_BL))
+ggplot(with(data, na.omit(data.frame(Edema,Edema_M1 =Edema1, Dose_Change = recode(Diuretics_recom_BL, '-1' = 'Down-titration', '0' = 'No change', '1' = 'Up-titration'))))) + 
+  geom_histogram(aes(x=Edema_M1,y=..density.., fill=interaction(Edema,Dose_Change)),color="grey70", bins=4)+
+  facet_grid(Edema~Dose_Change)+
+  theme(legend.position = "none")
 
-summary(glm(data.new_congestion_scores$Clinical_congestion_score_1 ~ data$Loop_dose_BL1 + data.new_congestion_scores$Clinical_congestion_score_BL))
+# Same but in a table
+write.csv(prop.table(with(data,(table(Diuretics_recom_BL, Edema1, Edema))), margin = c("Diuretics_recom_BL", "Edema")), "edema_vs_dose_change.csv", row.names = FALSE)
 
+# Linear regression
+summary(glm(Edema1 ~ Loop_dose_BL1 + Edema, data = data))
+summary(glm(Edema1 ~ Diuretics_recom_BL + Edema, data = data))
+# The bigger the baseline edema, the bigger the drop
+summary(glm((Edema1 - Edema) ~ Edema, data = data))
+
+# What if we include baseline dose
+summary(glm(data$Edema1 ~ data$Loop_dose_BL + data$Diuretics_recom_BL + data$Edema))
+summary(glm(data$Edema1 ~ data$Loop_dose_BL + data$Loop_dose_BL1 + data$Edema))
+
+# Logistic regression
+summary(glm(ifelse(Edema1 == 0, 1, 0) ~ Diuretics_recom_BL + as.factor(Edema), data = data, family = "binomial"))
+summary(glm(ifelse(Edema1 < 2, 1, 0) ~ Diuretics_recom_BL + as.factor(Edema), data = data, family = "binomial"))
+summary(glm(ifelse(Edema1 < 3, 1, 0) ~ Diuretics_recom_BL + as.factor(Edema), data = data, family = "binomial"))
+# Now with baseline dose
+summary(glm(ifelse(Edema1 == 0, 1, 0) ~ Loop_dose + Loop_dose_BL + as.factor(Edema), data = data, family = "binomial"))
+summary(glm(ifelse(Edema1 < 2, 1, 0) ~ Diuretics_recom_BL + Loop_dose_BL + as.factor(Edema), data = data, family = "binomial"))
+summary(glm(ifelse(Edema1 < 3, 1, 0) ~ Diuretics_recom_BL + Loop_dose_BL + as.factor(Edema), data = data, family = "binomial"))
+
+
+## Orthopnea
+
+# Simple Table 
+with(data,(table(Orthopnea, Diuretics_recom_BL)))
+
+# Plot of distributions
+ggplot(with(data, na.omit(data.frame(Orthopnea,Orthopnea_M1 =Orthopnea1, Dose_Change = recode(Diuretics_recom_BL, '-1' = 'Down-titration', '0' = 'No change', '1' = 'Up-titration'))))) + 
+  geom_histogram(aes(x=Orthopnea_M1,y=..density.., fill=interaction(Orthopnea,Dose_Change)),color="grey70", bins=4)+
+  facet_grid(Orthopnea~Dose_Change)+
+  theme(legend.position = "none")
+
+# Tibble
+tibble.orthopnea_BL1_by_intervention <- data.frame(intervention = data$Diuretics_recom_BL, ortho_1 = data$Orthopnea1, ortho_bl = data$Orthopnea) %>%
+  group_by(intervention) %>%
+  summarise(bl_mean = mean(ortho_bl, na.rm = TRUE), 
+            m1_mean = mean(ortho_1, na.rm = TRUE),
+            diff_mean = mean(ortho_1 - ortho_bl, na.rm = TRUE),
+            n = n())
+write.csv(tibble.orthopnea_BL1_by_intervention, "tibble.orthopnea_BL1_by_intervention.csv", row.names = FALSE)
+
+# Linear regression
+summary(glm(Orthopnea1 ~ Diuretics_recom_BL + Orthopnea, data = data))
+summary(glm(Orthopnea1 ~ Diuretics_recom_BL + Orthopnea + Own_congestionscore_BL, data = data))
+
+# Logistic regressions
+summary(glm(ifelse(Orthopnea1 == 0, 1, 0) ~ Diuretics_recom_BL + as.factor(Orthopnea), data = data, family = "binomial"))
+summary(glm(ifelse(Orthopnea1 < 2, 1, 0) ~ Diuretics_recom_BL + as.factor(Orthopnea), data = data, family = "binomial"))
+summary(glm(ifelse(Orthopnea1 < 3, 1, 0) ~ Diuretics_recom_BL + as.factor(Orthopnea), data = data, family = "binomial"))
+
+## Congestion scores
+summary(glm(data$Own_congestionscore_1 ~ data$Diuretics_recom_BL + data$Own_congestionscore_BL))
+
+
+write.csv(prop.table(with(data,(table(Diuretics_recom_BL, Orthopnea1, Orthopnea))), margin = c("Diuretics_recom_BL", "Orthopnea")), "orthopnea_vs_dose_change.csv", row.names = FALSE)
+
+# Linear regression: Congestion score vs Diuretics_recom_BL
 summary(with(data, glm(Own_congestionscore_1 ~ Loop_dose_BL1 + Own_congestionscore_BL)))
 summary(with(data, glm(Own_congestionscore_1 ~ Diuretics_recom_BL + Own_congestionscore_BL)))
 
+# Linear regression: Congestion score vs Diuretics_recom_BL
+summary(glm(data.new_congestion_scores$Combined_congestion_score_1 ~ data$Diuretics_recom_BL + data.new_congestion_scores$Combined_congestion_score_BL))
+summary(glm(data.new_congestion_scores$Clinical_congestion_score_1 ~ data$Diuretics_recom_BL + data.new_congestion_scores$Clinical_congestion_score_BL))
+summary(glm(data.congention_score$CCS1 ~ data$Diuretics_recom_BL + data.congention_score$CCS))
+summary(glm(data$Own_congestionscore_1 ~ data$Diuretics_recom_BL + data$Own_congestionscore_BL))
+
+# Linear regression: Congestion score vs Loop_dose_BL1
+summary(glm(data.new_congestion_scores$Combined_congestion_score_1 ~ data$Loop_dose_BL1 + data.new_congestion_scores$Combined_congestion_score_BL))
+summary(glm(data.new_congestion_scores$Clinical_congestion_score_1 ~ data$Loop_dose_BL1 + data.new_congestion_scores$Clinical_congestion_score_BL))
+summary(glm(data.congention_score$CCS1 ~  data$Loop_dose_BL1 + data.congention_score$CCS))
+summary(glm(data$Own_congestionscore_1 ~ data$Loop_dose_BL1 + data$Own_congestionscore_BL))
+
+# Linear regression: Congestion score vs Loop_dose_BL1 (with current dose)
+summary(glm(data.new_congestion_scores$Combined_congestion_score_1 ~ data$Loop_dose_BL + data$Loop_dose_BL1 + data.new_congestion_scores$Combined_congestion_score_BL))
+summary(glm(data.new_congestion_scores$Clinical_congestion_score_1 ~ data$Loop_dose_BL + data$Loop_dose_BL1 + data.new_congestion_scores$Clinical_congestion_score_BL))
+summary(glm(data.congention_score$CCS1 ~ data$Loop_dose_BL + data$Loop_dose_BL1 + data.congention_score$CCS))
+summary(glm(data$Own_congestionscore_1 ~ data$Loop_dose_BL + data$Loop_dose_BL1 + data$Own_congestionscore_BL))
+# What if this is diuretic resistance? What if we use the half  patients that have the lowest baseline dose?
+summary(glm(Own_congestionscore_1 ~ Loop_dose_BL + Loop_dose_BL1 + Own_congestionscore_BL, data = data[data$Loop_dose_BL <= 80,]))
+summary(glm(Own_congestionscore_1 ~ Loop_dose_BL + Diuretics_recom_BL + Own_congestionscore_BL, data = data[data$Loop_dose_BL <= 80,]))
+
+
+# Same but with tibbles
 congest_score_by_intervention_tibble_combined <- data.frame(intervention = data$Diuretics_recom_BL, cs_1 = data.new_congestion_scores$Combined_congestion_score_1, cs_bl = data.new_congestion_scores$Combined_congestion_score_BL) %>%
   group_by(intervention) %>%
   summarise(cs_bl_mean = mean(cs_bl, na.rm = TRUE), 
             cs_1_mean = mean(cs_1, na.rm = TRUE),
             cs_diff_mean = mean(cs_1 - cs_bl, na.rm = TRUE),
             n = n())
-
+write.csv(congest_score_by_intervention_tibble_combined, "congest_score_by_intervention_tibble_combined.csv", row.names = FALSE)
+  
 congest_score_by_intervention_tibble_clinical <- data.frame(intervention = data$Diuretics_recom_BL, cs_1 = data.new_congestion_scores$Clinical_congestion_score_1, cs_bl = data.new_congestion_scores$Clinical_congestion_score_BL) %>%
   group_by(intervention) %>%
   summarise(cs_bl_mean = mean(cs_bl, na.rm = TRUE), 
             cs_1_mean = mean(cs_1, na.rm = TRUE),
             cs_diff_mean = mean(cs_1 - cs_bl, na.rm = TRUE),
             n = n())
+write.csv(congest_score_by_intervention_tibble_clinical, "congest_score_by_intervention_tibble_clinical.csv", row.names = FALSE)
 
 congest_score_by_intervention_tibble_own <- data.frame(intervention = data$Diuretics_recom_BL, cs_1 = data$Own_congestionscore_1, cs_bl = data$Own_congestionscore_BL) %>%
   group_by(intervention) %>%
@@ -1370,5 +1500,89 @@ congest_score_by_intervention_tibble_own <- data.frame(intervention = data$Diure
             cs_1_mean = mean(cs_1, na.rm = TRUE),
             cs_diff_mean = mean(cs_1 - cs_bl, na.rm = TRUE),
             n = n())
+write.csv(congest_score_by_intervention_tibble_own, "congest_score_by_intervention_tibble_own.csv", row.names = FALSE)
 
-hist(data.new_congestion_scores$Combined_congestion_score_BL[data$Diuretics_recom_BL == -1], breaks = 25)
+congest_score_by_intervention_tibble_CCI <- data.frame(intervention = data$Diuretics_recom_BL, cs_1 = data.congention_score$CCS1, cs_bl = data.congention_score$CCS) %>%
+  group_by(intervention) %>%
+  summarise(cs_bl_mean = mean(cs_bl, na.rm = TRUE), 
+            cs_1_mean = mean(cs_1, na.rm = TRUE),
+            cs_diff_mean = mean(cs_1 - cs_bl, na.rm = TRUE),
+            n = n())
+write.csv(congest_score_by_intervention_tibble_CCI, "congest_score_by_intervention_tibble_cci.csv", row.names = FALSE)
+
+## BNP
+
+## Orthopnea
+
+# Tibble
+tibble.BNP_BL1_by_intervention <- data.frame(intervention = data$Diuretics_recom_BL, bnp_1 = data.biomarkers$BNP1, bnp_bl = data.biomarkers$NBNP) %>%
+  group_by(intervention) %>%
+  summarise(bl_mean = mean(bnp_bl, na.rm = TRUE), 
+            m1_mean = mean(bnp_1, na.rm = TRUE),
+            diff_mean = mean(bnp_1 - bnp_bl, na.rm = TRUE),
+            n = n())
+write.csv(tibble.BNP_BL1_by_intervention, "tibble.BNP_BL1_by_intervention.csv", row.names = FALSE)
+
+# Linear regression
+summary(glm(data.biomarkers$BNP1 ~ data$Diuretics_recom_BL + data.biomarkers$NBNP))
+summary(glm(data.biomarkers$BNP1 ~ data$Loop_dose_BL1 + data.biomarkers$NBNP))
+summary(glm(data.biomarkers$BNP1 ~ data$Diuretics_recom_BL + data.biomarkers$NBNP + data$Own_congestionscore_BL))
+summary(glm(data.biomarkers$BNP1 ~ data$Loop_dose_BL1 + data.biomarkers$NBNP + data$Own_congestionscore_BL))
+summary(glm(data.biomarkers$BNP1 ~ data$Diuretics_recom_BL + data.biomarkers$NBNP + data$Loop_dose_BL))
+summary(glm(data.biomarkers$BNP1 ~ data$Loop_dose_BL1 + data.biomarkers$NBNP + data$Loop_dose_BL))
+summary(glm(data.biomarkers$BNP1 ~ data$Loop_dose_BL1 + data.biomarkers$NBNP + data$Loop_dose_BL + data$Own_congestionscore_BL))
+
+# Linear regression - log
+summary(glm(log(data.biomarkers$BNP1) ~ data$Diuretics_recom_BL + log(data.biomarkers$NBNP)))
+summary(glm(log(data.biomarkers$BNP1) ~ data$Diuretics_recom_BL + log(data.biomarkers$NBNP) + data$Own_congestionscore_BL))
+summary(glm(log(data.biomarkers$BNP1) ~ data$Loop_dose_BL1 + log(data.biomarkers$NBNP) + data$Own_congestionscore_BL))
+summary(glm(log(data.biomarkers$BNP1) ~ data$Diuretics_recom_BL + log(data.biomarkers$NBNP) + data$Loop_dose_BL))
+summary(glm(log(data.biomarkers$BNP1) ~ data$Loop_dose_BL1 + log(data.biomarkers$NBNP) + data$Loop_dose_BL))
+
+id.Dx.dose.visit_days <- merge(id.Dx.dose, data[, c("id", "V1", "V3", "V6", "V12", "V18")], by = 'id')
+v1_change <- data$iddata$ data$V1
+
+tibble_dose_V1 <- merge(
+  na.omit(
+    id.Dx.dose.visit_days %>%
+      group_by(id)%>%
+      summarise(pre_V1_dose = dose[Dx == (V1-1)], post_V1_dose = dose[Dx == V1])),
+  data[,c("id", "Diuretics_recom_1")], by = "id")
+tibble_dose_V1$diff = tibble_dose_V1$post_V1_dose - tibble_dose_V1$pre_V1_dose
+
+# Only 20% of the cases where the Diuretics_recom_1 == 1, there is an up titration the day of the visit
+with(tibble_dose_V1, sum(diff > 0 & Diuretics_recom_1 == 1, na.rm = TRUE) / sum(Diuretics_recom_1 == 1, na.rm = TRUE))
+# Only in 30% of the cases where the Diuretics_recom_1 == -1, there is a down titration the day of the visit
+with(tibble_dose_V1, sum(diff < 0 & Diuretics_recom_1 == -1, na.rm = TRUE) / sum(Diuretics_recom_1 == -1, na.rm = TRUE))
+# 99% of the cases where the Diuretics_recom_1 == 0, there is no dose change the day of the visit
+with(tibble_dose_V1, sum(diff == 0 & Diuretics_recom_1 == 0, na.rm = TRUE) / sum(Diuretics_recom_1 == 0, na.rm = TRUE))
+
+# What if we add a margin of x days?
+tibble_dose_V1_3days <- merge(
+  na.omit(
+    id.Dx.dose.visit_days %>%
+      group_by(id)%>%
+      summarise(pre_V1_dose = dose[Dx == (V1-1)], post_V1_dose = dose[Dx == (V1+10)])),
+  data[,c("id", "Diuretics_recom_1")], by = "id")
+tibble_dose_V1_3days$diff = tibble_dose_V1_3days$post_V1_dose - tibble_dose_V1_3days$pre_V1_dose
+# It goes up to 45% of the cases where the Diuretics_recom_1 == -1, there is a down titration the day of the visit
+with(tibble_dose_V1_3days, sum(diff > 0 & Diuretics_recom_1 == 1, na.rm = TRUE) / sum(Diuretics_recom_1 == 1, na.rm = TRUE))
+# It goes up to 50% of the cases where the Diuretics_recom_1 == -1, there is a down titration the day of the visit
+with(tibble_dose_V1_3days, sum(diff < 0 & Diuretics_recom_1 == -1, na.rm = TRUE) / sum(Diuretics_recom_1 == -1, na.rm = TRUE))
+# Goes down to 93% of the cases where the Diuretics_recom_1 == 0, there is no dose change the day of the visit
+with(tibble_dose_V1_3days, sum(diff == 0 & Diuretics_recom_1 == 0, na.rm = TRUE) / sum(Diuretics_recom_1 == 0, na.rm = TRUE))
+
+# What about V3?
+tibble_dose_V3 <- merge(
+  na.omit(
+    id.Dx.dose.visit_days %>%
+      group_by(id)%>%
+      summarise(pre_dose = dose[Dx == (V3-1)], post_dose = dose[Dx == (V3+10)])),
+  data[,c("id", "Diuretics_recom_3")], by = "id")
+tibble_dose_V3$diff = tibble_dose_V3$post_dose - tibble_dose_V3$pre_dose
+# It goes up to 45% of the cases where the Diuretics_recom_1 == -1, there is a down titration the day of the visit
+with(tibble_dose_V3, sum(diff > 0 & Diuretics_recom_3 == 1, na.rm = TRUE) / sum(Diuretics_recom_3 == 1, na.rm = TRUE))
+# It goes up to 50% of the cases where the Diuretics_recom_1 == -1, there is a down titration the day of the visit
+with(tibble_dose_V3, sum(diff < 0 & Diuretics_recom_3 == -1, na.rm = TRUE) / sum(Diuretics_recom_3 == -1, na.rm = TRUE))
+# Goes down to 93% of the cases where the Diuretics_recom_1 == 0, there is no dose change the day of the visit
+with(tibble_dose_V3, sum(diff == 0 & Diuretics_recom_3 == 0, na.rm = TRUE) / sum(Diuretics_recom_3 == 0, na.rm = TRUE))
